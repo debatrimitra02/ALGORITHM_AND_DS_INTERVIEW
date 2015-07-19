@@ -10,46 +10,34 @@ void swap(int arr[],int x, int y)
 	arr[y]=temp;
 }
 
-
-void InsertionSort(int arr[], int size)
+void insertionSort(int arr[], int n)
 {
-	cout<<"Size of array"<<size<<endl;
+   int i, key, j;
+   for (i = 1; i < n; i++)
+   {
+       key = arr[i];
+       j = i-1;
 
-	int current;
-
-	for(int i=0;i<size;i++)
-	{
-		current=arr[i];
-		curr_ix=i;
-
-		int j=i;
-		while(j!=0)
-		{
-			if(current>=arr[j-1])
-				break;
-			else
-				swap(arr,curr_ix,j-1);
-			curr_ix=j-1;
-		}
-	
-	}
-
-
-	
-	
+       while (j >= 0 && arr[j] > key)
+       {
+          swap(arr,j+1,j);
+          j = j-1;
+       }
+   }
 }
 
+void print_array(int arr[],int size)
+{
+	for (int i=0;i<size;i++)
+		cout<<arr[i]<<endl;
+}
 int main()
 {
-	int arr[]={1,5,4};
+	int arr[]={9,7,6,5};
 	int size=sizeof(arr)/sizeof(int);
-	InsertionSort(arr,size);
+	insertionSort(arr,size);
+	print_array(arr,size);
 
-//	swap(arr,0,1);
-
-	for(int i=0;i<size;i++)
-	{		cout<<arr[i]<<endl;
-		
-	}
+return 0;
 
 }
