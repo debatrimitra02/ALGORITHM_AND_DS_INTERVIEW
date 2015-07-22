@@ -4,12 +4,11 @@ using namespace std;
 
 struct node
 {
-
 	int data;
 	node* next; 
-
 };
 
+// TESTED -ok-----
 void print_linked_list(node* head)
 {
 	node* current=head;
@@ -17,21 +16,21 @@ void print_linked_list(node* head)
 	{
 		
 		cout<<current->data<<endl;
-		current=current->next;
-		
+		current=current->next;	
 	}
-
 
 }
 
+///----Tested -OK ----
 void FindMiddleElement(node* head)
 {
 	struct node* fast=head;
 	struct node* slow=head;
+//	cout<<"head"<<head->data<<endl;
 
 	if(head!=NULL)
 	{
-		while(fast!=NULL && fast->next!=NULL)
+		while(fast->next!=NULL && fast->next->next!=NULL)
 		{
 			slow=slow->next;
 			fast=fast->next->next;
@@ -45,7 +44,7 @@ void FindMiddleElement(node* head)
 
 }
                    
-
+// TESTED ---OK --
 void DeleteAnElement(node* head,int val)
 {
 	node* current=head->next;
@@ -73,6 +72,8 @@ void DeleteAnElement(node* head,int val)
 	
 	
 }
+
+// TESTED -----OK ---
 void DeleteMiddleElement(node* head)
 {
 	node* fast=head;
@@ -83,7 +84,7 @@ void DeleteMiddleElement(node* head)
 	fast=fast->next->next;
 	slow=slow->next;
 	
-	while(fast->next!=NULL)
+	while(fast->next!=NULL && fast->next->next!=NULL)
 	{
 		behind=behind->next;
 		slow=slow->next;
@@ -95,15 +96,14 @@ void DeleteMiddleElement(node* head)
 
 ///////////////////////////Delete Middle Element Given the pointer to just the middle element////////////////////
 
+// TESTED ---- OK ----
+
 void delete_middle(node* middle)
 {
-
 	middle->data=middle->next->data;
-	node* p_temp=middle->next->next;
-	delete(middle->next);
-	middle->next=p_temp;
 
-
+	node *p=middle->next->next;
+	middle->next=p;
 }
 /////////////////////////////Sort Linked List/////////////////////////////////////////////////////////////////////
 
@@ -115,20 +115,20 @@ void delete_middle(node* middle)
 /////////////////////////Reverse Linked List//////////////////////////////////////////////////////////////////////
 void reverse(node* head)
 {
-	struct node* prev=NULL;
-	struct node* current=head;
-	struct node* next=head;
+	node* prev   = NULL;
+    	node* current = head;
+    	node* next;
+    	while (current != NULL)
+    	{
+        	next  = current->next;  
+        	current->next = prev;   
+        	prev = current;
+        	current = next;
+    	}
 
-	while(current->next!=NULL)
-	{
-		current->next=prev;
-		current=current->next;
-		prev=current;
-		next=current->next;
-	}
-	head=prev;
-
+    	head = prev;
 }
+
 /////////////////////////////////Palindrome Checker///////////////////////////////////////////////////////////////
 void Palindrome(node* head)
 {
@@ -189,7 +189,7 @@ int main()
 //	print_linked_list(head);
 
 //	cout<<"Deleting 2"<<endl;
-//	DeleteAnElement(head,100);
+//	DeleteAnElement(head,2);
 
 //	cout<<"AFTER DELETION"<<endl;
 //	print_linked_list(head);
@@ -204,7 +204,7 @@ int main()
 //	cout<<"Sorted Linked List"<<endl;
 //	Sort_List(head);
 //	print_linked_list(head);
-//	cout<<"Reverse Linked List"<<endl;
+	cout<<"Reverse Linked List"<<endl;
 	reverse(head);
 	print_linked_list(head);
 	return 0;
